@@ -1,7 +1,7 @@
 % Fig_point_alpha_lattice.m, 7.2.2025
 % To show how points converge for point alpha
 
-% Please cite as "Henning U. Voss and Douglas J. Ballon, Quasilattices of the Spectre monotile, arXiv (2025)"
+% Please cite as "Henning U. Voss and Douglas J. Ballon, Quasilattices of the aperiodic Spectre monotile, arXiv (2025)"
 % The license attached in GitHub applies, at https://github.com/henningle/TileOneOne_Quasi
 
 clear
@@ -60,19 +60,20 @@ axis image
 
 % Plot connection arrow to center
 for kk=1:N
-    % if points(kk,1)>xstart && points(kk,1)<xstart+xydelta && points(kk,2)>ystart && points(kk,2)<ystart+xydelta
     plot(ax,[centers(kk,1),points(kk,1)],[centers(kk,2),points(kk,2)],'k')
     plot(ax,centers(kk,1),centers(kk,2),'Marker','o','MarkerFaceColor','k','MarkerEdgeColor','k','MarkerSize',6)
     % text(ax,centers(kk,1)+.1,centers(kk,2),num2str(kk))
 end
 hold off
 
+title('Point \alpha on first tiling iteration')
+
 set(h,'Color', [1 1 1])
 
-savefile=['png/fig_point_alpha'];
+savefile=['fig_point_alpha'];
 if write_figures
     print(h, '-dpng',  '-r400', [savefile '.png'])
-    saveas(h, [savefile '.fig'])
+    % saveas(h, [savefile '.fig'])
 end
 
 %% Analysis
@@ -110,7 +111,6 @@ xtexts={'0', '0', '-C', '-C+.5', '-C', '-2C', '-2C', '-2C-1', '-2C-1.5', '-C-1.5
 ytexts={'0', '1', '1.5', 'C+1.5', '2C+1.5', '2C+1', '2C', '2C', 'C', 'C-.5', 'C-1.5', 'C-1.5', '-1.5', '-1'};
 for kk=1:14
     text(S(kk,1)+.06,S(kk,2)+.1,['(' xtexts{kk} ',' ytexts{kk} ')'],'FontSize',12)
-    % text(S(kk,1)+.06,S(kk,2)+.08,[ xtexts{kk} ],'FontSize',12); text(S(kk,1)+.06,S(kk,2)-.08,[ ytexts{kk} ],'FontSize',12)
 end
 
 % S3: Label vertices algebraically
@@ -119,7 +119,6 @@ ytexts={'1.5','-C+1.5','-2C+1.5','-2C+1','-2C','-2C', '-C','-C-.5','-C','0','C',
 for kk=1:14
     kk2=2*16+kk;
     text(S(kk2,1)+.06,S(kk2,2)+.1,['(' xtexts{kk} ',' ytexts{kk} ')'],'FontSize',12)
-    % text(S(kk2,1)+.06,S(kk2,2)+.08,[ xtexts{kk} ],'FontSize',12); text(S(kk2,1)+.06,S(kk2,2)-.08,[ ytexts{kk} ],'FontSize',12)
 end
 
 % Test: Overlabel vertices numerically
@@ -138,7 +137,6 @@ ytexts={'3C+1.5','3C+1.5','2C+1.5','2C+2','2C+1.5','C+1.5', 'C+1.5','C+.5','C','
 for kk=1:14
     kk2=3*16+kk;
     text(S(kk2,1)+.06,S(kk2,2)+.1,['(' xtexts{kk} ',' ytexts{kk} ')'],'FontSize',12)
-    % text(S(kk2,1)+.06,S(kk2,2)+.08,[ xtexts{kk} ],'FontSize',12); text(S(kk2,1)+.06,S(kk2,2)-.08,[ ytexts{kk} ],'FontSize',12)
 end
 
 % Test: Overlabel vertices numerically
@@ -162,22 +160,27 @@ end
 % Note: angles=[150,90,90,30,-30,-30,-90] for N=1 means that tile 3 is rotated 150 and tile 4 90 degrees, because tile 2 is part of M
 % [cos, -sin] [x]
 % [sin,  cos] [y]
-%{
 % Tile 3: 
-[cos(deg2rad(150)) -sin(deg2rad(150)) ] % = [-C -.5]
-[sin(deg2rad(150)) cos(deg2rad(150))]   %   [.5 -C]
+% [cos(deg2rad(150)) -sin(deg2rad(150))] % = [-C -.5]
+% [sin(deg2rad(150))  cos(deg2rad(150))] %   [.5 -C]
 % Tile 4:
-[cos(deg2rad(90)) -sin(deg2rad(90)) ] % = [0 -1]
-[sin(deg2rad(90)) cos(deg2rad(90))]   %   [1  0]
-%}
+% [cos(deg2rad(90)) -sin(deg2rad(90))] % = [0 -1]
+% [sin(deg2rad(90))  cos(deg2rad(90))] %   [1  0]
 
 kk=1;
 T10=[0;0]; % Origin of tile 1
 C1=[-(15*C+5.5)/14; (13*C+0.5)/14]; % Center of tile 1
 text(centers(kk,1)+.06,centers(kk,2)+.08, '-(15*C+5.5)/14','Color','r'); text(centers(kk,1)+.06,centers(kk,2)-0.08, '(13*C+0.5)/14','Color','r')
 
+set(h,'Color', [1 1 1]) 
 axis image
 hold off
+
+savefile='fig_point_alpha_shifts';
+if write_figures
+    print(h, '-dpng',  '-r400', [savefile '.png'])
+    % saveas(h, [savefile '.fig'])
+end
 
 % kk=3;
 % How to get center for tile 3
@@ -191,14 +194,6 @@ C3=M3*C1+T30; % Center of tile 3
 M4=[0 -1; 1 0];
 T40=[-C-1.5;3*C+1.5];
 C4=M4*C1+T40;
-
-set(h,'Color', [1 1 1]) % make white background
-
-savefile=['png/fig_point_alpha_shifts'];
-if write_figures
-    print(h, '-dpng',  '-r400', [savefile '.png'])
-    saveas(h, [savefile '.fig'])
-end
 
 %% Determine point alpha as the common point for decoration of tiles 3 and 4
 

@@ -1,21 +1,20 @@
 % TileOneOne_fc.m, 5.12.2024
 
-% Please cite as "Henning U. Voss and Douglas J. Ballon, Quasilattices of the Spectre monotile, arXiv (2025)"
+% Please cite as "Henning U. Voss and Douglas J. Ballon, Quasilattices of the aperiodic Spectre monotile, arXiv (2025)"
 % The license attached in GitHub applies, at https://github.com/henningle/TileOneOne_Quasi
 
 function [S,centers,xangles,vecs,N,Ncorners]=TileOneOne_fc(Nmax)
 
-plotting=false;
-
 %% Parameters
 
-plotkeypoints=false; % Set to false if plotting key points not wanted
+plotting=false; % Plotting quasilattice
+plotkeypoints=false; % Plotting key points
 
 %% Main script
 
 % Tile placement function
 % Each tile has 3 components: x, y, key point number (0 for no key point, 1 to 4 if key point)
-% The placetile function takes in a matrix of size (number of rows, 3)
+% The placetile function takes in a matrix of size [number of rows, 3]
 % The first 2 columns are the coordinates of the tiling, the third is a label of key points
 placetile=@(x, angle, coord) ...
     [transpose( [cos(angle*pi/180), -sin(angle*pi/180); ...
@@ -120,7 +119,7 @@ for N=1:Nmax
             angles=[120,60,60,0,-60,-60,-120]; % Conjecture: Angles converged from here on
     end
 
-    % For iteration 3 and higher, keypoints are computed from the previous two iterations
+    % For iteration 3 and higher, key points are computed from the previous two iterations
     if N > 2
         Sind=circshift(keyind,-1);
         Mind(1:3)=Sind(1:3)-16*nS(N-2);
@@ -170,7 +169,7 @@ for N=1:Nmax
 
     if plotting
         if plotkeypoints
-            % Plot all keypoints before pruning, in red
+            % Plot all key points before pruning, in red
             hold on
             for n=1:4:length(keyind)
                 plot(S([keyind(n:n+3);keyind(n)],1),S([keyind(n:n+3);keyind(n)],2),'ro-');
@@ -187,7 +186,7 @@ for N=1:Nmax
 
     S(:,3)=0; % Clean out this iteration's key points
 
-    % Set new keypoints for constructing the next iteration
+    % Set new key points for constructing the next iteration
     S(keyind2(1),3)=1;
     S(keyind2(2),3)=2;
     S(keyind2(3),3)=3;
