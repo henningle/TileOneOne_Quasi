@@ -1,2 +1,2 @@
 # TileOneOne_Quasi
-Quasilattices of the aperiodic Spectre monotile
+Quasilattices of the Spectre monotile
