@@ -184,7 +184,7 @@ end
 
 % kk=3;
 % How to get center for tile 3
-% The centers for tiles > 1 are not computed by the mean values of the vertices but but by the shift and rotation of tile 1
+% The centers for tiles > 1 are not computed by the mean values of the vertices but by the shift and rotation of tile 1
 % Use the relationship to the origin, rotate this vector by 90 degrees, and shift it by the new origin of tile 3
 M3=[-C -.5; .5 -C]; % Rotation of tile 3
 T30=[-3*C-3;1.5]; % Origin of tile 3
