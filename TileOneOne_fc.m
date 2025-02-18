@@ -220,7 +220,7 @@ N=nStrue; % Size or RF array
 
 centers=zeros(N,2);
 for n=1:N % Loop through resonators
-    centers(n,:)=[mean(S((n-1)*16+1:(n-1)*16+14,1)),mean(S((n-1)*16+1:(n-1)*16+14,2))]; % When computing the center, the last point needs to be removed becasue it is repeated
+    centers(n,:)=[mean(S((n-1)*16+1:(n-1)*16+14,1)),mean(S((n-1)*16+1:(n-1)*16+14,2))]; % When computing the center, the last point needs to be removed because it is repeated
 end
 
 % Angles
